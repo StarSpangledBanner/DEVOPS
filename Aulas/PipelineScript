@@ -1,0 +1,37 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Checkout') {
+            steps {
+                git 'https://github.com/StarSpangledBanner/DEVOPS'
+            }
+            
+        }
+        stage('Build') {
+            steps {
+                dir('ADS030/Aulas/aluno_online') {
+                sh 'npm install' 
+                    
+                }
+            }
+            
+        }
+        stage('Uni Testing') {
+            steps {
+                dir('ADS030/Aulas/cucumber') {
+                sh 'cucumber'
+                }
+            }
+            
+        }
+        stage('E2E Testing') {
+            steps {
+                dir('ADS030/Aulas/jest') {
+                sh 'jest'
+                }
+            }
+            
+        }
+    }
+}
